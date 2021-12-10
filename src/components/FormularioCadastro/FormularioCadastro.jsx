@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@material-ui/core";
 
-function FormCadastro() {
+function FormCadastro({aoEnviar}) {
+    const [nome, setNome] = useState("");
+    const [sobrenome, setSobrenome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(true);
 
-    let nome = "";
     return (
-        <form onSubmit={(evento) => {
-            evento.preventDefault();
-        }}>
-            <TextField
-                onChange={evento => {
+        <form
+            onSubmit={ (evento) => {
 
-                    nome = evento.target.value;
-                }}
+                evento.preventDefault();
+                aoEnviar({nome, sobrenome, cpf, promocoes, novidades});
+            } }
+        >
+            <TextField
+                value={nome}
+                onChange={ (evento) => { setNome(evento.target.value); } }
                 id="nome"
                 label="Nome"
                 variant="outlined"
@@ -20,6 +26,8 @@ function FormCadastro() {
                 margin="normal"
             />
             <TextField
+                onChange={ (evento) => { setSobrenome(evento.target.value); } }
+                value={sobrenome}
                 id="sobrenome"
                 label="SobreNome"
                 variant="outlined"
@@ -27,6 +35,8 @@ function FormCadastro() {
                 margin="normal"
             />
             <TextField
+                value={cpf}
+                onChange={ (evento) => { setCpf(evento.target.value); } }
                 id="cpf"
                 label="CPF"
                 variant="outlined"
@@ -37,13 +47,23 @@ function FormCadastro() {
             <FormControlLabel
                 label="Promoções"
                 control={
-                    <Switch name="promocoes" color="primary" defaultChecked />
+                    <Switch
+                        checked={promocoes}
+                        onChange={ (evento) => { setPromocoes(evento.target.checked); } }
+                        name="promocoes"
+                        color="primary"
+                    />
                 }
             />
             <FormControlLabel
                 label="Novidades"
                 control={
-                    <Switch name="novidades" color="primary" defaultChecked />
+                    <Switch
+                        checked={novidades}
+                        onChange={ (evento) => { setNovidades(evento.target.checked); } }
+                        name="novidades"
+                        color="primary"
+                    />
                 }
             />
 
