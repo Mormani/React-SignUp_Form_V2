@@ -10,19 +10,18 @@ function FormCadastro({aoEnviar, validarCPF}) {
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
 
-    const [erros, setErros] = useState( {cpf: { valido: true, texto: ""  }});
+    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
 
     return (
         <form
-            onSubmit={ (evento) => {
-
+            onSubmit={(evento) => {
                 evento.preventDefault();
-                aoEnviar({nome, sobrenome, cpf, promocoes, novidades});
-            } }
+                aoEnviar({ nome, sobrenome, cpf, promocoes, novidades });
+            }}
         >
             <TextField
                 value={nome}
-                onChange={ (evento) => { setNome(evento.target.value); } }
+                onChange={(evento) => { setNome(evento.target.value); }}
                 id="nome"
                 label="Nome"
                 variant="outlined"
@@ -30,7 +29,7 @@ function FormCadastro({aoEnviar, validarCPF}) {
                 margin="normal"
             />
             <TextField
-                onChange={ (evento) => { setSobrenome(evento.target.value); } }
+                onChange={(evento) => { setSobrenome(evento.target.value); }}
                 value={sobrenome}
                 id="sobrenome"
                 label="Sobrenome"
@@ -40,16 +39,15 @@ function FormCadastro({aoEnviar, validarCPF}) {
             />
             <TextField
                 value={cpf}
-
-                onChange={ (evento) => { setCpf(evento.target.value); } }
-                onBlur={evento => {
-
+                onChange={(evento) => { setCpf(evento.target.value); }}
+                onBlur={() => {
                     const ehValido = validarCPF(cpf);
-                    setErros({cpf: ehValido});
+                    setErros({ cpf: ehValido });
                 }}
 
                 error={!erros.cpf.valido}
                 helperText={erros.cpf.texto}
+
                 id="CPF"
                 label="CPF"
                 variant="outlined"
@@ -62,7 +60,7 @@ function FormCadastro({aoEnviar, validarCPF}) {
                 control={
                     <Switch
                         checked={promocoes}
-                        onChange={ (evento) => { setPromocoes(evento.target.checked); } }
+                        onChange={(evento) => { setPromocoes(evento.target.checked); }}
                         name="promocoes"
                         color="primary"
                     />
@@ -73,7 +71,7 @@ function FormCadastro({aoEnviar, validarCPF}) {
                 control={
                     <Switch
                         checked={novidades}
-                        onChange={ (evento) => { setNovidades(evento.target.checked); } }
+                        onChange={(evento) => { setNovidades(evento.target.checked); }}
                         name="novidades"
                         color="primary"
                     />
