@@ -4,7 +4,7 @@ import DadosUsuario from "./DadosUsuario";
 import DadosEntrega from "./DadosEntrega";
 import {Step, StepLabel, Stepper, Typography} from "@material-ui/core";
 
-function FormCadastro({aoEnviar, validarCPF}) {
+function FormCadastro({aoEnviar, validacoes}) {
 
     const [etapaAtual, setEtapaAtual] = useState(0);
     function proxEtapa() { setEtapaAtual(etapaAtual + 1) };
@@ -15,10 +15,10 @@ function FormCadastro({aoEnviar, validarCPF}) {
     useEffect(() => { if(etapaAtual === (forms.length - 1)) aoEnviar(dadosColetados); });
 
     const forms = [
-        <DadosUsuario  aoEnviar={coletarDados} />,
-        <DadosPessoais aoEnviar={coletarDados} validarCPF={validarCPF} />,
-        <DadosEntrega  aoEnviar={coletarDados} />,
-        <Typography variant="h5">Obrigado pelo Cadastro!</Typography>
+        <DadosUsuario  aoEnviar={coletarDados} validacoes={validacoes}/>,
+        <DadosPessoais aoEnviar={coletarDados} validacoes={validacoes} />,
+        <DadosEntrega  aoEnviar={coletarDados} validacoes={validacoes}/>,
+        <Typography variant="h5" align="center">Obrigado pelo Cadastro!</Typography>
     ];
 
     return (
